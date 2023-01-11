@@ -70,7 +70,7 @@ public class CoinMarketCapDefintions {
     }
 
     @And("Filter by Mineable")
-    public void filterByMineable() throws InterruptedException {
+    public void filterByMineable() {
         homePageActions.waitForElementPresence(homePageLocators.addFilterLocator);
         homePageActions.clickButton("Add Filter");
 
