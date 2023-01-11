@@ -5,11 +5,9 @@ import com.abiodunt.utils.DriverContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;
 
 import java.lang.invoke.MethodHandles;
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -19,9 +17,7 @@ public class HomePageActions extends PageActions {
     private static final Logger LOGGER = LogManager.getLogger(MethodHandles.lookup().lookupClass());
 
     public HomePageActions() {
-
         this.homePageLocators = new HomePageLocators();
-
         PageFactory.initElements(DriverContext.getDriver(), homePageLocators);
     }
 
@@ -46,31 +42,25 @@ public class HomePageActions extends PageActions {
 
             dataTable.add(rowData);
         }
-        LOGGER.info("The full list of cryptocurrency data is listed below: {}", dataTable);
-//
-//        System.out.println();
-//
-//        System.out.println(fullTableData.get(0).get("Name"));
+        LOGGER.info("Data table: \n {} \n", dataTable);
     }
 
-    public void clickFilter(WebElement element) {
-        JavascriptExecutor executor = (JavascriptExecutor)DriverContext.getDriver();
-        executor.executeScript("arguments[0].click();", element);
-    }
-
-    public void sortRows(String value) {
+    public void showRows(String value) {
+        LOGGER.info("Filtering table to show {} rows", value);
         homePageLocators.rowSortDropdown.click();
         DriverContext.getDriver().findElement(By.xpath("//*[text()='" + value + "']")).click();
         waitForPageLoad();
     }
 
     public void clickButton(String value) {
+        LOGGER.info("Clicking button with text: {}", value);
         WebElement element = DriverContext.getDriver().findElement(By.xpath("//*[ text() = '" + value + "' ]"));
         JavascriptExecutor executor = (JavascriptExecutor) DriverContext.getDriver();
         executor.executeScript("arguments[0].click();", element);
     }
 
     public void handleDropDown(String value) {
+        LOGGER.info("Opening drop down with text: {}", value);
         WebElement element = DriverContext.getDriver().findElement(By.xpath("//*[ contains (text(), '" +  value + "' ) ]"));
         element.click();
     }
@@ -86,22 +76,18 @@ public class HomePageActions extends PageActions {
     }
 
     public void handleToggle(String text, String labelId) {
+        LOGGER.info("Toggling control with text: {}", text);
         DriverContext.getDriver().findElement(By.xpath("//button[contains(text(),'" + text + "')]"))
                 .findElement(By.xpath("//label[@id='" + labelId + "']")).click();
     }
 
     public void handleButtonByText(String text) {
+        LOGGER.info("Clicking button with text: {}", text);
         DriverContext.getDriver().findElement(By.xpath("//button[contains(text(),'" + text + "')]")).click();
     }
 
     public void handleInputByXPath(String locator, String value) {
+        LOGGER.info("Entering value: {} into input field", value);
         DriverContext.getDriver().findElement(By.xpath(locator)).sendKeys(String.valueOf(value));
     }
-
-//    DriverContext.getDriver().findElement(By.xpath("//button[contains(text(),'Mineable')]")).findElement(By.xpath("//label[@id='mineable']")).click();
-//    DriverContext.getDriver().findElement(By.xpath("//button[contains(text(),'All Cryptocurrencies')]")).click();
-//    DriverContext.getDriver().findElement(By.xpath("//button[contains(text(),'Coins')]")).click();
-//    DriverContext.getDriver().findElement(By.xpath("//button[contains(text(),'Price')]")).click();
-//    DriverContext.getDriver().findElement(By.xpath("//input[@data-qa-id='range-filter-input-min']")).sendKeys("100");
-//    DriverContext.getDriver().findElement(By.xpath("//input[@data-qa-id='range-filter-input-max']")).sendKeys("10000");
 }
