@@ -11,10 +11,19 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.lang.invoke.MethodHandles;
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
 
 import static com.abiodunt.utils.DriverContext.TIMEOUT;
 
 public abstract class PageActions {
+
+    public static List<String> headerNames = new ArrayList<>();
+    public static List<LinkedHashMap<String, String>> fullTableData = new ArrayList<>();
+
+    public static List<String> filteredHeaderNames = new ArrayList<>();
+    public static List<LinkedHashMap<String, String>> filteredTableData = new ArrayList<>();
 
     private static final Logger LOGGER = LogManager.getLogger(MethodHandles.lookup().lookupClass());
 
