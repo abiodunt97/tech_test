@@ -28,8 +28,8 @@ public abstract class PageActions {
     public static List<String> filteredHeaderNames = new ArrayList<>();
     public static List<LinkedHashMap<String, String>> filteredTableData = new ArrayList<>();
 
-    NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(Locale.US);
-    NumberFormat numberFormat = NumberFormat.getNumberInstance();
+    private final NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(Locale.US);
+    private final NumberFormat numberFormat = NumberFormat.getNumberInstance();
 
     private static final Logger LOGGER = LogManager.getLogger(MethodHandles.lookup().lookupClass());
 
