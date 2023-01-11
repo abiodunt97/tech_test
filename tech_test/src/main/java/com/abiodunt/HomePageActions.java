@@ -75,4 +75,33 @@ public class HomePageActions extends PageActions {
         element.click();
     }
 
+    public void scrollToBottom() {
+        JavascriptExecutor js = (JavascriptExecutor) DriverContext.getDriver();
+        js.executeScript("window.scrollBy(0,document.body.scrollHeight)", "");
+    }
+
+    public void scrollToTop() {
+        JavascriptExecutor js = (JavascriptExecutor) DriverContext.getDriver();
+        js.executeScript("window.scrollTo(0, -document.body.scrollHeight)");
+    }
+
+    public void handleToggle(String text, String labelId) {
+        DriverContext.getDriver().findElement(By.xpath("//button[contains(text(),'" + text + "')]"))
+                .findElement(By.xpath("//label[@id='" + labelId + "']")).click();
+    }
+
+    public void handleButtonByText(String text) {
+        DriverContext.getDriver().findElement(By.xpath("//button[contains(text(),'" + text + "')]")).click();
+    }
+
+    public void handleInputByXPath(String locator, String value) {
+        DriverContext.getDriver().findElement(By.xpath(locator)).sendKeys(String.valueOf(value));
+    }
+
+//    DriverContext.getDriver().findElement(By.xpath("//button[contains(text(),'Mineable')]")).findElement(By.xpath("//label[@id='mineable']")).click();
+//    DriverContext.getDriver().findElement(By.xpath("//button[contains(text(),'All Cryptocurrencies')]")).click();
+//    DriverContext.getDriver().findElement(By.xpath("//button[contains(text(),'Coins')]")).click();
+//    DriverContext.getDriver().findElement(By.xpath("//button[contains(text(),'Price')]")).click();
+//    DriverContext.getDriver().findElement(By.xpath("//input[@data-qa-id='range-filter-input-min']")).sendKeys("100");
+//    DriverContext.getDriver().findElement(By.xpath("//input[@data-qa-id='range-filter-input-max']")).sendKeys("10000");
 }
