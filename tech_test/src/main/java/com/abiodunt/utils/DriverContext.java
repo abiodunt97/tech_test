@@ -12,7 +12,7 @@ public class DriverContext {
 
     private static WebDriver driver;
     private static WebDriverWait wait;
-    public final static long TIMEOUT = 10;
+    public final static long TIMEOUT = 5;
 
     private DriverContext() {
         WebDriverManager.chromedriver().setup();
